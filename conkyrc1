@@ -85,17 +85,17 @@ ${color d7d7d7}${voffset 3}${cpugraph cpu6 1,300}${voffset 1}${cpugraph cpu6 17,
 ${offset 10}${voffset -10}${font neuropol:size=20}  ${execpi 60 python ~/.conky/scripts/gmail.py}${font Nimbus Mono L:size=8 style=bold}  mail(s)
 #${offset 10}  ${voffset -10}${font neuropol:size=20}  ${execi 300 conkyEmail --servertype=POP --servername=pop3.live.com --username=******** --password=******* --ssl}${font Nimbus Mono L:size=8 style=bold}  Gmail
 ${offset 20}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1}
-${offset 10}${if_up wlan0}${color2} WiFi       Online $else ${color3}WiFi   Offline $endif
-${offset 10}${if_up eth0}${color2} Ethernet   Online $else ${color3}Eth0   Offline $endif
-${offset 17}${if_up wlan0}WiFi       ${wireless_link_qual_perc wlan0}% $else ${color3}WiFi   Offline $endif
+${offset 10}${if_up wlp2s0}${color2} WiFi       Online $else ${color3}WiFi   Offline $endif
+${offset 10}${if_up eno1}${color2} Ethernet   Online $else ${color3}Eth0   Offline $endif
+${offset 17}${if_up wlp2s0}WiFi       ${wireless_link_qual_perc wlp2s0}% $else ${color3}WiFi   Offline $endif
 
 
 #..: NET TRAFFIC :..
 ${color d7d7d7}${voffset 1}${cpugraph cpu6 1,200}${voffset 1}${cpugraph cpu6 17,1}${color3}
-${offset 15}${if_up eth0}${voffset -5}Dw ${font neuropol:size=20} ${voffset -8}${downspeed eth0}$else ${font Nimbus Mono L:size=8 style=bold}${voffset -5}Dw ${font neuropol:size=20} ${voffset -8}${downspeed wlan0}$endif${font Nimbus Mono L:size=8 style=bold}
-${offset 15}${if_up eth0}${voffset 6}Up ${font neuropol:size=20} ${voffset -7}${upspeed eth0}$else ${font Nimbus Mono L:size=8 style=bold}${voffset 6}Up ${font neuropol:size=20} ${voffset -7}${upspeed wlan0}$endif${font Nimbus Mono L:size=8 style=bold}
+${offset 15}${if_up eth0}${voffset -5}Dw ${font neuropol:size=20} ${voffset -8}${downspeed eth0}$else ${font Nimbus Mono L:size=8 style=bold}${voffset -5}Dw ${font neuropol:size=20} ${voffset -8}${downspeed wlp2s0}$endif${font Nimbus Mono L:size=8 style=bold}
+${offset 15}${if_up eth0}${voffset 6}Up ${font neuropol:size=20} ${voffset -7}${upspeed eth0}$else ${font Nimbus Mono L:size=8 style=bold}${voffset 6}Up ${font neuropol:size=20} ${voffset -7}${upspeed wlp2s0}$endif${font Nimbus Mono L:size=8 style=bold}
 ${offset 20}${voffset -1}${cpubar cpu6 0, 110}${voffset 2}${color1}
-${offset 15}${if_up ppp0} tDown   ${totaldown ppp0}$else tDown   ${totaldown wlan0}$endif
+${offset 15}${if_up ppp0} tDown   ${totaldown ppp0}$else tDown   ${totaldown wlp2s0}$endif
 #
 #..: USB DEVICES :..
 #-- set for your use --

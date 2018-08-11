@@ -91,7 +91,7 @@ ${color d7d7d7}${offset 100}${voffset -8}${cpugraph cpu6 17,1}${voffset -3}${hr 
 ${offset 150}${voffset -10} ${font neuropol:size=20}${battery_percent BAT0}%${font Nimbus Mono L:size=8 style=bold}  Battery
 ${offset 160}${voffset -5}${cpubar cpu6 0, 150}${voffset 2}${color1}
 ${offset 160}..:: ${acpiacadapter} ::..
-${battery_time BAT0}
+${offset 200}${battery_time BAT0}
 
 #..: CPU USAGE :..
 #--- if you use a multi-core system, change values ---
