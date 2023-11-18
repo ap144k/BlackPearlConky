@@ -1,19 +1,21 @@
-import os
- 
-#Enter your username and password below within double quotes
+import requests
+
+# Enter your username and password below within double quotes
 # eg. username="username" and password="password"
-username="**********"
-password="**********"
-com="wget -q -O - https://"+username+":"+password+"@mail.google.com/mail/feed/atom --no-check-certificate"
+username = "**********"
+password = "**********"
+url = "https://mail.google.com/mail/feed/atom"
 
-temp=os.popen(com)
-msg=temp.read()
-index=msg.find("<fullcount>")
-index2=msg.find("</fullcount>")
-fc=int(msg[index+11:index2])
+response = requests.get(url, auth=(username, password))
+if response.status_code == 200:
+    msg = response.text
+    index = msg.find("<fullcount>")
+    index2 = msg.find("</fullcount>")
+    fc = int(float(msg[index + 11.0:index2]))
 
-if fc==0:
-   print ("0")
+    if fc == 0:
+        print("0")
+    else:
+        print(str(fc))
 else:
-   print (str(fc))
-
+    print("Error:", response.status_code)
