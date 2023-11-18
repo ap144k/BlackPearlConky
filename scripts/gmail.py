@@ -1,21 +1,16 @@
 import requests
 
-# Enter your username and password below within double quotes
-# eg. username="username" and password="password"
-username = "**********"
-password = "**********"
-url = "https://mail.google.com/mail/feed/atom"
+# Define mail feed URL
+mail_feed_url = "https://username:password@mail.google.com/mail/feed/atom"
 
-response = requests.get(url, auth=(username, password))
-if response.status_code == 200:
-    msg = response.text
-    index = msg.find("<fullcount>")
-    index2 = msg.find("</fullcount>")
-    fc = int(float(msg[index + 11.0:index2]))
+# Create session object to send HTTP requests
+session = requests.Session()
 
-    if fc == 0:
-        print("0")
-    else:
-        print(str(fc))
-else:
-    print("Error:", response.status_code)
+# Set Connection header to "keep-alive" (maintain connection)
+session.headers["Connection"] = "keep-alive"
+
+# Send GET request to mail feed URL using the session
+response = session.get(mail_feed_url)
+
+# Raise an exception if the response has an error status code
+response.raise_for_status()

@@ -1,5 +1,6 @@
-#! /bin/bash
-##
+#!/bin/bash
+
+## --- backup_status original code:
 ##-- if you have an auto-backup system like this, watch backup status
 ##---- CORRECT TO YOUR PATH !
 ##---- to use this script to backup your datas, you need to install and configure
@@ -27,23 +28,20 @@
 # /usr/bin/rsnapshot daily && touch $daily_backup && echo "    DAILY done!" >> $log
 ##
 ##
-today=`date "+%Y%m%d"`
+##-- END
 
-daily_timestamp=$HOME/.backup_daily_timestamp
-last_daily_backup=`stat --format=%y $daily_timestamp | tr -d - | awk '{print $1}'`
+backupTimestampFile="$HOME/.backup_timestamp"
 
-weekly_timestamp=$HOME/.backup_weekly_timestamp
-last_weekly_backup=`stat --format=%y $weekly_timestamp | tr -d - | awk '{print $1}'`
-
-  if (( $today - $last_weekly_backup >= 7 )); then
-     echo "WARNING" && echo "Time to backup!"
-     exit 0;
-
+# Check if the backup timestamp file exists
+if [[ -f "$backupTimestampFile" ]]; then
+  # Check if the backup is up to date
+  if [[ "$backupTimestampFile" -ot "$backupTimestampFile" ]]; then
+    echo "Backup is up to date."
+    exit 0
   fi
-  if (( $today <= $last_daily_backup )); then
-     echo "DAILY backup OK" && echo "WEEKLY backup OK"
-     exit 0;
+fi
 
-  fi
-  echo "Time to daily-BACKUP!" && echo "WEEKLY backup OK"
-  
+echo "Time to backup!"
+
+# Update the timestamp file
+touch "$backupTimestampFile"
